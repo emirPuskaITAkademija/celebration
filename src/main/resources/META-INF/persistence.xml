@@ -5,7 +5,7 @@
              version="3.0">
   <persistence-unit name="celebrationPU" transaction-type="JTA">
     <jta-data-source>jdbc/celebrations</jta-data-source>
-    <class>ba.smoki.celebration.ejb.user.User</class>
+<!--    <class>ba.smoki.celebration.ejb.user.User</class>-->
     <class>ba.smoki.celebration.ejb.service.ServiceType</class>
   </persistence-unit>
 </persistence>

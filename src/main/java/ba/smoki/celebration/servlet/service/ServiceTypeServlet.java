@@ -1,6 +1,7 @@
 package ba.smoki.celebration.servlet.service;
 
 import ba.smoki.celebration.ejb.service.ServiceTypeService;
+import ba.smoki.celebration.ejb.service.ServiceTypeServiceLocal;
 import jakarta.inject.Inject;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -15,7 +16,7 @@ import java.io.PrintWriter;
 public class ServiceTypeServlet extends HttpServlet {
 
     @Inject
-    private ServiceTypeService serviceTypeService;
+    private ServiceTypeServiceLocal serviceTypeService;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
