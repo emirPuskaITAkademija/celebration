@@ -1,5 +1,6 @@
 package ba.smoki.celebration.servlet.service;
 
+import ba.smoki.celebration.ejb.service.ServiceType;
 import ba.smoki.celebration.ejb.service.ServiceTypeService;
 import ba.smoki.celebration.ejb.service.ServiceTypeServiceLocal;
 import jakarta.inject.Inject;
@@ -11,6 +12,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
 @WebServlet(urlPatterns = {"/services"})
 public class ServiceTypeServlet extends HttpServlet {
@@ -35,8 +37,13 @@ public class ServiceTypeServlet extends HttpServlet {
             out.println("<html>");
             out.println("<head><title>Service</title></head>");
             out.println("<body>");
-            out.println("<h1>Vozdra</h1>");
-            out.println("<p>" + serviceTypeService.findAll().get(0).getName() + "</p>");
+            out.println("<h1>Service Type</h1>");
+            List<ServiceType> serviceTypes = serviceTypeService.findAll();
+            out.println("<ol>");
+            for(ServiceType serviceType: serviceTypes){
+                out.println("<li>" + serviceType.getName() + "</li>");
+            }
+            out.println("</ol>");
             out.println("</body>");
             out.println("</html>");
         }
