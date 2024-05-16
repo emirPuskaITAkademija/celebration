@@ -6,7 +6,7 @@ import jakarta.persistence.criteria.CriteriaQuery;
 import java.util.List;
 
 //EJB -> potomci
-//E -> User, ServiceType
+//E -> User, ServiceType, Country
 public abstract class AbstractService<E> {
 
     private final Class<E> entityClass;
