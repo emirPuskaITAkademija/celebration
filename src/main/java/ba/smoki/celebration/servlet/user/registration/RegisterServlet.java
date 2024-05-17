@@ -14,7 +14,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(name = "registrationServlet", urlPatterns = {"/register"})
+@WebServlet(urlPatterns = {"/register"})
 public class RegisterServlet extends HttpServlet {
     @Inject
     private TownServiceLocal townServiceLocal;
@@ -30,6 +30,10 @@ public class RegisterServlet extends HttpServlet {
     }
 
     private void processRequest(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-
+        List<Town> towns = townServiceLocal.findAll();
+        request.setAttribute("towns", towns);
+        request.setAttribute("message", "");
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher(Router.registration);
+        requestDispatcher.forward(request, response);
     }
 }

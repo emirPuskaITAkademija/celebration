@@ -1,24 +1,25 @@
-package ba.smoki.celebration.ejb.town;
+package ba.smoki.celebration.ejb.user.privilege;
 
 import ba.smoki.celebration.ejb.user.User;
 import jakarta.persistence.*;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Table(name = "town")
-public class Town {
+@Table(name = "privilege")
+public class Privilege implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "id", nullable = false)
     private Integer id;
 
-    @Column(name = "name")
+    @Column(name = "name", nullable = false)
     private String name;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "town")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "privilege")
     private List<User> users;
 
     public Integer getId() {
@@ -37,29 +38,24 @@ public class Town {
         this.name = name;
     }
 
-    public void setUsers(List<User> users) {
-        this.users = users;
-    }
-
     public List<User> getUsers() {
         return users;
+    }
+
+    public void setUsers(List<User> users) {
+        this.users = users;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Town town = (Town) o;
-        return Objects.equals(id, town.id);
+        Privilege privilege = (Privilege) o;
+        return Objects.equals(id, privilege.id);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(id);
-    }
-
-    @Override
-    public String toString() {
-        return name + "[" + id + "]";
     }
 }

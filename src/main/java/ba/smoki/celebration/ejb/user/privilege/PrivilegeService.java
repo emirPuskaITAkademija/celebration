@@ -1,4 +1,4 @@
-package ba.smoki.celebration.ejb.town;
+package ba.smoki.celebration.ejb.user.privilege;
 
 import ba.smoki.celebration.ejb.AbstractService;
 import jakarta.ejb.Stateless;
@@ -6,13 +6,13 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 
 @Stateless
-public class TownService extends AbstractService<Town> implements TownServiceLocal {
+public class PrivilegeService extends AbstractService<Privilege> implements PrivilegeServiceLocal {
 
     @PersistenceContext(unitName = "celebrationPU")
     private EntityManager entityManager;
 
-    public TownService() {
-        super(Town.class);
+    public PrivilegeService() {
+        super(Privilege.class);
     }
 
     @Override

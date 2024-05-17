@@ -12,6 +12,10 @@ It also provides a framework for integrating the existing custom tags with the J
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
 <body>
+<%
+    String basePath = request.getContextPath();
+    String registrationExecutionPath = basePath+"/register/execute";
+%>
 <section class="vh-100 gradient-custom">
     <div class="container py-5 h-100">
         <div class="row justify-content-center align-items-center h-100">
@@ -19,7 +23,7 @@ It also provides a framework for integrating the existing custom tags with the J
                 <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
                     <div class="card-body p-4 p-md-5">
                         <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">Registration Form</h3>
-                        <form method="post" action="register">
+                        <form method="post" action="<%=registrationExecutionPath%>">
                             <div class="row">
                                 <div class="col-md-6 mb-4">
                                     <div class="form-outline">
@@ -41,7 +45,7 @@ It also provides a framework for integrating the existing custom tags with the J
                             <div class="row">
                                 <div class="col-md-6 mb-4">
                                     <div class="form-outline">
-                                        <input type="text" id="firstName" name="name"
+                                        <input type="text" id="firstName" name="firstName"
                                                class="form-control form-control-lg" placeholder="First Name"/>
                                     </div>
                                 </div>

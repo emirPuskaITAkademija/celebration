@@ -1,5 +1,7 @@
 package ba.smoki.celebration.ejb.user;
 
+import ba.smoki.celebration.ejb.town.Town;
+import ba.smoki.celebration.ejb.user.privilege.Privilege;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 
@@ -8,6 +10,9 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "user")
+@NamedQueries(
+        @NamedQuery(name = "User.findByUsername", query = "SELECT u FROM User u WHERE u.username=:username")
+)
 public class User implements Serializable {
 
     @Id
@@ -45,6 +50,14 @@ public class User implements Serializable {
 
     @Column(name = "active")
     private Boolean active = true;
+
+    @JoinColumn(name = "id_town", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private Town town;
+
+    @JoinColumn(name = "id_privilege", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private Privilege privilege;
 
     public Integer getId() {
         return id;
@@ -108,6 +121,23 @@ public class User implements Serializable {
 
     public void setActive(Boolean active) {
         this.active = active;
+    }
+
+
+    public Privilege getPrivilege() {
+        return privilege;
+    }
+
+    public void setPrivilege(Privilege privilege) {
+        this.privilege = privilege;
+    }
+
+    public Town getTown() {
+        return town;
+    }
+
+    public void setTown(Town town) {
+        this.town = town;
     }
 
     @Override

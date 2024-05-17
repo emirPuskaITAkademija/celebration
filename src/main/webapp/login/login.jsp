@@ -7,6 +7,10 @@
 </head>
 <body>
 <div style="padding: 100px">
+    <%
+        String basePath = request.getContextPath();
+        String registrationPath = basePath+"/register";
+    %>
     <section class=" text-center text-lg-start">
         <style>
             .rounded-t-5 {
@@ -56,7 +60,7 @@
                             <div class="row mb-4">
                                 <div class="col">
                                     <!-- Simple link -->
-                                    <a href="registration">Do you want to register ?</a>
+                                    <a href=<%=registrationPath%>>Do you want to register ?</a>
                                 </div>
                             </div>
                         </form>
