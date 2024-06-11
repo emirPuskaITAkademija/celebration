@@ -2,6 +2,7 @@ package ba.smoki.celebration.ejb.user;
 
 import ba.smoki.celebration.ejb.town.Town;
 import ba.smoki.celebration.ejb.user.privilege.Privilege;
+import jakarta.json.bind.annotation.JsonbTransient;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 
@@ -29,6 +30,7 @@ public class User implements Serializable {
     @Basic(optional = false)
     @Size(max = 255)
     @Column(name = "password")
+    @JsonbTransient
     private String password;
 
     @Basic(optional = true)
@@ -53,6 +55,7 @@ public class User implements Serializable {
 
     @JoinColumn(name = "id_town", referencedColumnName = "id")
     @ManyToOne(optional = false)
+    @JsonbTransient
     private Town town;
 
     @JoinColumn(name = "id_privilege", referencedColumnName = "id")

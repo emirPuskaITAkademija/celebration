@@ -1,6 +1,7 @@
 package ba.smoki.celebration.ejb.town;
 
 import ba.smoki.celebration.ejb.user.User;
+import jakarta.json.bind.annotation.JsonbTransient;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -19,6 +20,7 @@ public class Town {
     private String name;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "town")
+    @JsonbTransient
     private List<User> users;
 
     public Integer getId() {

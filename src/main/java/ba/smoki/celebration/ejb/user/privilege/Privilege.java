@@ -1,6 +1,7 @@
 package ba.smoki.celebration.ejb.user.privilege;
 
 import ba.smoki.celebration.ejb.user.User;
+import jakarta.json.bind.annotation.JsonbTransient;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -20,6 +21,7 @@ public class Privilege implements Serializable {
     private String name;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "privilege")
+    @JsonbTransient
     private List<User> users;
 
     public Integer getId() {
