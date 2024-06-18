@@ -1,5 +1,6 @@
 package ba.smoki.celebration.ejb.user;
 
+import ba.smoki.celebration.servlet.user.login.AuthenticationModel;
 import ba.smoki.celebration.servlet.user.registration.RegistrationModel;
 import jakarta.ejb.Local;
 
@@ -23,4 +24,6 @@ public interface UserServiceLocal {
     User findByUsername(String username);
 
     User register(RegistrationModel registrationModel);
+
+    User login(AuthenticationModel authenticationModel);
 }

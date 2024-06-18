@@ -48,7 +48,7 @@ public class RegisterExecutorServlet extends HttpServlet {
         User user = userServiceLocal.register(registrationModel);
         if (user != null) {
             RequestDispatcher requestDispatcher = request.getRequestDispatcher("/login");
-            requestDispatcher.include(request, response);
+            requestDispatcher.forward(request, response);
         } else {
             List<Town> towns = townServiceLocal.findAll();
             request.setAttribute("towns", towns);

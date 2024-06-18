@@ -5,16 +5,15 @@ import ba.smoki.celebration.ejb.town.Town;
 import ba.smoki.celebration.ejb.town.TownServiceLocal;
 import ba.smoki.celebration.ejb.user.privilege.Privilege;
 import ba.smoki.celebration.ejb.user.privilege.PrivilegeServiceLocal;
+import ba.smoki.celebration.servlet.user.login.AuthenticationModel;
 import ba.smoki.celebration.servlet.user.registration.RegistrationModel;
 import jakarta.ejb.Stateless;
 import jakarta.inject.Inject;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.NonUniqueResultException;
-import jakarta.persistence.PersistenceContext;
-import jakarta.persistence.Query;
+import jakarta.persistence.*;
 import jakarta.security.enterprise.identitystore.Pbkdf2PasswordHash;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 @Stateless
 public class UserService extends AbstractService<User> implements UserServiceLocal {
@@ -61,6 +60,26 @@ public class UserService extends AbstractService<User> implements UserServiceLoc
             create(user);
         }
         return user;
+    }
+
+    /**
+     *
+     * @param authenticationModel
+     * @return user or null
+     */
+    @Override
+    public User login(AuthenticationModel authenticationModel) {
+        try {
+            Query query = entityManager.createNamedQuery("User.findByUsername");
+            query.setParameter("username", authenticationModel.getUsername());
+            User user = (User) query.getSingleResult();
+            char[] plainPassword = authenticationModel.getPlainPasswordAsCharArray();
+            String hashedPassword = user.getPassword();
+            boolean verified = pbkdf2PasswordHash.verify(plainPassword, hashedPassword);
+            return verified ? user : null;
+        } catch (NonUniqueResultException | NoResultException e) {
+            throw new RuntimeException(e.getMessage());
+        }
     }
 
     public User findByUsername(String username) {
